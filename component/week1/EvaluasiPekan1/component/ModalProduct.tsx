@@ -45,11 +45,7 @@ function ModalProduct({ onSubmit, onClose }: any) {
         keyboardType="numeric"
         onChangeText={setPrice}/>
         <TouchableOpacity
-        style={{
-            backgroundColor: 'blue',
-            padding: 10,
-            marginTop: 10,
-        }}
+        style={styles.buttonSumbit}
         onPress={() => {handleProduct()
         }}>
             <Text style={{color: 'white', textAlign: 'center'}}>Submit</Text>
@@ -69,6 +65,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 8,
   },
+  buttonSumbit:{
+     backgroundColor: 'blue',
+            padding: 10,
+            marginTop: 10,
+            borderRadius:12 
+  }
 });
 
 export default ModalProduct 
