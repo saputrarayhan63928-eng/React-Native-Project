@@ -3,6 +3,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Login from '../Screen/Login';
 import ListProduct from '../Screen/ListProduct';
 import { NavigationContainer } from '@react-navigation/native';
+import ModalProduct from '../Screen/ModalProduct';
+
 
 const Tabs = createBottomTabNavigator();
 
@@ -14,7 +16,8 @@ function ButtonNavigation() {
         screenOptions={{ headerShown: false }}
       >
         <Tabs.Screen name="Login" component={Login} />
-        <Tabs.Screen name="MarketPlace" component={ListProduct} />
+        <Tabs.Screen name="MarketPlace" component={ListProduct} options={{title:'Market Place'}} />
+        <Tabs.Screen name='AddProduct' component={ModalProduct} options={{title:'Add Product'}}/>
       </Tabs.Navigator>
     </NavigationContainer>
   );

@@ -3,7 +3,7 @@ import { View, TouchableOpacity, Text , TextInput, Alert, StyleSheet } from "rea
 import DataProduct from "../Data/DataIsi";
 import { useState } from "react";
 
-function ModalProduct({ onSubmit, onClose }: any) {
+function ModalProduct({ onSubmit }: any) {
     const [img,setImg] = useState('');
     const [name,setName] = useState('');
     const [price,setPrice] = useState('');
@@ -22,7 +22,6 @@ function ModalProduct({ onSubmit, onClose }: any) {
         };
 
         onSubmit(newProduct);
-        onClose();
     }
 
     return(   

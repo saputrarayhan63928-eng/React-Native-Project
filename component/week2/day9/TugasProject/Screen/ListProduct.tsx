@@ -4,19 +4,14 @@ import { FlatList, Image,Text,View,StyleSheet,TouchableOpacity, Modal } from "re
 import ModalProduct from "./ModalProduct";
 
 function ListProduct(){
-    const [isModalVisible,setIsModalVisible] = useState(false);
     const [Data,setData] = useState(DataProduct);
 
     const handleAddProduct = (newProduct:any) => {
         setData([...Data, newProduct]);
-        setIsModalVisible(false);
     }
     
     return(
      <View style={styles.main}>
-        <TouchableOpacity onPress={() => setIsModalVisible(true)}>
-            <Text style={styles.button}>Add Product</Text>
-        </TouchableOpacity>
         <FlatList
         contentContainerStyle={{gap: 16}}
         showsVerticalScrollIndicator={false}
@@ -37,17 +32,13 @@ function ListProduct(){
         />
 
         <Modal
-        visible={isModalVisible}
+        visible={false}
         animationType="slide"
         // onRequestClose={() => setIsModalVisible(false)}
         >
           <View style={{ flex: 1, backgroundColor: 'white', padding: 20 }}>
-          <TouchableOpacity onPress={() => setIsModalVisible(false)}>
-            <Text style={styles.button}>Close Modal</Text>
-          </TouchableOpacity>
         <ModalProduct
         onSubmit={handleAddProduct}
-        onClose={() => setIsModalVisible(false)}
         />
         </View>
         </Modal>

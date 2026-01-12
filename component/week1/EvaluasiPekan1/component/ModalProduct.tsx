@@ -26,8 +26,8 @@ function ModalProduct({ onSubmit, onClose }: any) {
     }
 
     return(   
-    <View>
-        <Text>Input Product</Text>
+    <View >
+        <Text style={styles.Screen}>Input Product</Text>
         <TextInput 
         style={styles.input}
         placeholder="Masukkan Image url"
@@ -55,6 +55,10 @@ function ModalProduct({ onSubmit, onClose }: any) {
 }
 
 const styles = StyleSheet.create({
+    Screen:{
+        flex:1,
+        marginTop:30
+    },
     input: {
         borderWidth: 1,
         borderColor: 'black',
