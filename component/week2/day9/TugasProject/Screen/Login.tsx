@@ -10,6 +10,9 @@ import {
 
 function Login() {
     const [showPassword,setShowPassword] = useState(false)
+
+    const [name,setname] = useState('')
+    const [Password,setPassword] = useState('')
   return (
 
     // {---Ini Bagian Login Menu---}
@@ -43,7 +46,7 @@ function Login() {
         placeholder="Masukkan Pasword"
         secureTextEntry={!showPassword}
         placeholderTextColor="#9CA3AF"
-        
+        onChangeText={(value) => setPassword(value) }
         />
         <Pressable
          onPress={() => setShowPassword(!showPassword)}
@@ -114,8 +117,9 @@ function Login() {
 const Styles = StyleSheet.create({
   screen: {
     flex: 1,
-     marginLeft: 12,
-    marginRight:12
+    justifyContent:'center',
+    paddingHorizontal:20,
+    gap:12
   },
   loginMenu:{
     flexDirection:'row',

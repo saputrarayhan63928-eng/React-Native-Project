@@ -2,6 +2,8 @@ import React from "react";
 import { View, TouchableOpacity, Text , TextInput, Alert, StyleSheet } from "react-native";
 import DataProduct from "../Data/DataIsi";
 import { useState } from "react";
+import { Screen } from "react-native-screens";
+import DrawerNavigation from "../Route/DrawerNavigation";
 
 function ModalProduct({ onSubmit }: any) {
     const [img,setImg] = useState('');
@@ -25,7 +27,7 @@ function ModalProduct({ onSubmit }: any) {
     }
 
     return(   
-    <View>
+    <View style={styles.Screen}>
         <Text>Input Product</Text>
         <TextInput 
         style={styles.input}
@@ -54,6 +56,12 @@ function ModalProduct({ onSubmit }: any) {
 }
 
 const styles = StyleSheet.create({
+    Screen:{
+        flex:1,
+        justifyContent:'center',
+        paddingHorizontal:20,
+        gap:12
+    },
     input: {
         borderWidth: 1,
         borderColor: 'black',
