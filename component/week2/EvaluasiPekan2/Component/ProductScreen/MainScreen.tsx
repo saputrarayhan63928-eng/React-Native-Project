@@ -1,16 +1,23 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { FlatList, Image,Text,View,StyleSheet,TouchableOpacity, Modal } from "react-native";
 import ItemProduct from "../../Context/DataItem";
 import InputProductModal from "./InputItemModal";
+import { useAllProduct } from "../../hooks/useProductDetail";
+import { Product } from "../../Services/productService";
 
 function MainScreenProduct(){
-  const [Data,setData] = useState(ItemProduct);
+  const {products,loading} = useAllProduct()
+  const [Data,setData] = useState<Product[]>([]);
   const [isModalFisible,setIsModalVisible]= useState(false)
 
-    const handleAddProduct = (newProduct:any) => {
-        setData([...Data, newProduct]);
+    const handleAddProduct = (newProduct: Product) => {
+        setData(pref => [...pref, newProduct]);
     }
     
+    useEffect(() => {
+      setData(products)
+    }, [products])
+
 return(
      <View style={styles.main}>
         <FlatList
@@ -22,10 +29,11 @@ return(
         renderItem={({item}) => 
         <View style={styles.card}>
             <Image
-            source={{uri: item.img}}
+            source={{uri: item.image}}
             style= {styles.image}
             />
-            <Text style={styles.name}>Name: {item.name}</Text>
+            <Text style={styles.name}>Name: {item.title}</Text>
+              {/* <Text style={styles.name}>Name: {item.name.toUpperCase()}</Text> */}
             <Text style={styles.price}>Price: {item.price}</Text>
         </View>
         }
