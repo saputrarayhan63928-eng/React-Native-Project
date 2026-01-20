@@ -21,12 +21,18 @@ function Login() {
 
   const [showPassword, setShowPassword] = useState(false);
 
-    const handleLogin = () => {
+    const handleLogin = async () => {
+      if(!username || !password){
+        Alert.alert('Username dan password wajib diisi')
+        return
+      }
       try{
-        login(username,password)
-        Navigator.replace('Main',{userID: username})
-      } catch (e:any) {
-        Alert.alert(e.message)
+        await login(username,password)
+        Navigator.replace('Main')
+      } catch (err) {
+        Alert.alert("Login Gagal", 
+          err instanceof Error ? err.message : 'UnKnown Error'
+        )
       }
     }
 

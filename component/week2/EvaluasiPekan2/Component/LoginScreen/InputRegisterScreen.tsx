@@ -21,13 +21,20 @@ function Register() {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
+      if (!username || !password) {
+    Alert.alert('Username dan password wajib diisi')
+    return
+  }
     try{
-      register(username,password)
+      await register(username,password)
       Navigator.replace('Login')
-    } catch (e:any) {
-      Alert.alert(e.message)
-    }
+    } catch (err) {
+    Alert.alert(
+      'Register gagal',
+      err instanceof Error ? err.message : 'Unknown error'
+    )
+  }
   }
 
 
