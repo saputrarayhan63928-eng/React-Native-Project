@@ -5,13 +5,14 @@ import Register from '../Component/LoginScreen/InputRegisterScreen';
 import Login from '../Component/LoginScreen/InputLoginScreen';
 import AuthProvider from '../Auth/AuthContext';
 import MainRouth from './MainRouth';
+import { linking } from './Deeplinking';
 
 const Routh = createNativeStackNavigator();
 
 function LoginRouth() {
   return (
     <AuthProvider>
-      <NavigationContainer>
+      <NavigationContainer linking={linking}>
         <Routh.Navigator
           initialRouteName="Login"
           screenOptions={{ headerShown: false }}
