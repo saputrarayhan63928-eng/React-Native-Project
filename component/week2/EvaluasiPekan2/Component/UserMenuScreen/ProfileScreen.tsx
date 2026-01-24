@@ -1,5 +1,5 @@
 import React , {useState}from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useAuth } from '../../Auth/AuthContext';
 import { useNavigation } from "@react-navigation/native";
 
@@ -9,9 +9,22 @@ const Navigation = useNavigation<any>()
 const parentRoute = Navigation.getParent()?.getState()
   const userID =
     parentRoute?.routes[parentRoute.index]?.params?.userID;
-
+const {logout} = useAuth()
 
   return (
+    <View style={styles.root}>
+      {/* Logout button */}
+      <View>
+        <TouchableOpacity
+           disabled={false}
+        activeOpacity={0.5}
+        style={styles.logoutButton}
+        onPress={logout}
+        >
+          <Text style={styles.logoutText}>Logout</Text>
+        </TouchableOpacity>
+      </View>
+      {/* Container */}
     <View style={styles.container}>
       {/* Avatar */}
       <Image
@@ -19,7 +32,7 @@ const parentRoute = Navigation.getParent()?.getState()
           uri: 'https://i.pravatar.cc/150',
         }}
         style={styles.avatar}
-      />
+        />
 
       {/* Nama */}
       <Text style={styles.name}>{userID}</Text>
@@ -33,18 +46,38 @@ const parentRoute = Navigation.getParent()?.getState()
         <Text style={styles.infoText}>Member since: 2024</Text>
       </View>
     </View>
+        </View>
   );
 };
 
 export default ProfileScreen;
 
 const styles = StyleSheet.create({
+   root: {
+    flex: 1,
+    position: 'relative',
+    backgroundColor: '#fff',
+  },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#fff',
     padding: 20,
+  },
+  logoutButton: {
+    position: 'absolute',
+    top: 16,
+    right: 16,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    backgroundColor: '#ef4444',
+    borderRadius: 6,
+    zIndex: 10,
+  },
+   logoutText: {
+    color: '#fff',
+    fontWeight: '600',
   },
   avatar: {
     width: 120,

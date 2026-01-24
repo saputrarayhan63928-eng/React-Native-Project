@@ -1,10 +1,10 @@
 import React from "react";
 import { View, TouchableOpacity, Text , TextInput, Alert, StyleSheet } from "react-native";
 import { useState } from "react";
-import ItemProduct from "../../Context/DataItem";
+// import ItemProduct from "../../Context/DataItem";
 
 
-function InputProductModal({ onSubmit, onClose}: any) {
+function InputProductModal({ onSubmit, onClose,dataProduct}: any) {
     const [img,setImg] = useState('');
     const [name,setName] = useState('');
     const [price,setPrice] = useState('');
@@ -16,7 +16,7 @@ function InputProductModal({ onSubmit, onClose}: any) {
         }
 
         const newProduct = {
-            id: ItemProduct.length + 1,
+            id: dataProduct.length + 1,
             name: name,
             price: Number(price),
             img: img

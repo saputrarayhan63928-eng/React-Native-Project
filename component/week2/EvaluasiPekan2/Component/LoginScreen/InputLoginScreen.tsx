@@ -28,7 +28,6 @@ function Login() {
       }
       try{
         await login(username,password)
-        Navigator.replace('Main')
       } catch (err) {
         Alert.alert("Login Gagal", 
           err instanceof Error ? err.message : 'UnKnown Error'

@@ -4,14 +4,13 @@ import ProfileScreen from "../Component/UserMenuScreen/ProfileScreen";
 
 const Drawer = createDrawerNavigator()
 
-function ProfileRouth({route}: any){
-    const {userID} = route.params
+function ProfileRouth(){
     return(
             <Drawer.Navigator
             initialRouteName="MainProfile"
             screenOptions={{headerShown: true}}
             >
-                <Drawer.Screen name="MainProfile" component={ProfileScreen} options={{title:'Profile'}} initialParams={{userID}}/>
+                <Drawer.Screen name="MainProfile" component={ProfileScreen} options={{title:'Profile'}}/>
             </Drawer.Navigator>
     )
 }

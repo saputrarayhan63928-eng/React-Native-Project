@@ -19,13 +19,20 @@ function Register() {
   const [username, setUsername] = useState('')
   const [password,setPassword] = useState('')
 
+  const [confirmPassword,setConfirmPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false);
 
   const handleRegister = async () => {
-      if (!username || !password) {
-    Alert.alert('Username dan password wajib diisi')
+      if (!username || !password || !confirmPassword) {
+    Alert.alert('Senua field wajib diisi!!')
     return
   }
+
+  if(password !== confirmPassword){
+    Alert.alert('Password dan konfirmasi password tidak sama')
+    return
+  }
+
     try{
       await register(username,password)
       Navigator.replace('Login')
@@ -41,13 +48,15 @@ function Register() {
   return (
     // {---Ini Bagian Login Menu---}
     <View style={Styles.screen}>
+      {/* ---Bagian Header--- */}
       <View style={Styles.loginMenu}>
-        <TouchableOpacity
-        onPress={() => Navigator.replace('Login')}
-        >Login</TouchableOpacity>
+        <Pressable onPress={() => Navigator.replace('Login')}>
+            <Text>Login</Text>
+          </Pressable>
         <Text>|</Text>
         <Text>Register</Text>
       </View>
+      
       {/* --- Input Name--- */}
       <View>
         <Text style={Styles.TextInput}>UserName Address</Text>
@@ -80,33 +89,27 @@ function Register() {
           <Text>{showPassword ? 'Hide' : 'Show'}</Text>
         </Pressable>
       </View>
-      {/* ---Pengulangan Password--- */}
-      {/* <View style={Styles.PasswordInput}>
-        <Text style={Styles.TextInput}>Password</Text>
-        <Text>Forgot Password?</Text>
+      {/* ---Pengulangan Password---  */}
+       <View style={Styles.PasswordInput}>
+        <Text style={Styles.TextInput}>Konfirmasi Password</Text>
       </View>
       <View style={Styles.passwordWrapper}>
         <TextInput
           style={Styles.PasswordInputIndicator}
-          placeholder="Masukkan Pasword"
+          placeholder="Ulangi Pasword"
           secureTextEntry={!showPassword}
+          onChangeText={setConfirmPassword}
           placeholderTextColor="#9CA3AF"
         />
-        <Pressable
-          onPress={() => setShowPassword(!showPassword)}
-          style={Styles.eyeIcon}
-        >
-          <Text>{showPassword ? 'Hide' : 'Show'}</Text>
-        </Pressable>
-      </View> */}
-      {/* --- Login Button --- */}
+      </View> 
+       {/* --- Register Button --- */ }
       <TouchableOpacity
         disabled={false}
         activeOpacity={0.5}
         style={Styles.button}
         onPress={handleRegister}
       >
-        <Text style={{ color: 'white' }}>Sign In</Text>
+        <Text style={{ color: 'white' }}>Sign Up</Text>
       </TouchableOpacity>
       {/* --- Pemisah OR--- */} 
       <View style={Styles.divider}>

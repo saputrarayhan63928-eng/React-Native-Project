@@ -39,6 +39,10 @@ export function useAllProduct() {
     LoadProduct()
   }, []);
 
+  const addProduct = (product: Product) => {
+    setProducts(prev => [...prev, product])
+  }
 
-  return { loading,products}
+
+  return { loading,products, addProduct}
 }
