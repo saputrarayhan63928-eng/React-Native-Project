@@ -15,13 +15,9 @@ type CartItem = {
   qty: number;
 };
 
-const dummyCart: CartItem[] = [
-  { id: '1', title: 'T-Shirt', price: 120000, qty: 1 },
-  { id: '2', title: 'Shoes', price: 350000, qty: 2 },
-];
 
 function CartScreen() {
-    const {cart} = useCart()
+    const {cart,removeFromCart} = useCart()
   const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
 
   return (
@@ -36,6 +32,12 @@ function CartScreen() {
             <Text style={styles.name}>{item.title}</Text>
             <Text>Qty: {item.qty}</Text>
             <Text>$ {item.price.toLocaleString()}</Text>
+            <TouchableOpacity
+            style={styles.cartButton}
+            onPress={() => removeFromCart(item.id)}
+            >
+                <Text style={styles.cartText}>-</Text>
+            </TouchableOpacity>
           </View>
         )}
       />
@@ -91,6 +93,19 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: '600',
   },
+    cartButton: {
+  width: 36,
+  height: 36,
+  borderRadius: 18,
+  backgroundColor: '#2563eb',
+  alignItems: 'center',
+  justifyContent: 'center',
+},
+cartText: {
+  color: '#fff',
+  fontSize: 22,
+  fontWeight: 'bold',
+},
 });
 
 export default CartScreen;
