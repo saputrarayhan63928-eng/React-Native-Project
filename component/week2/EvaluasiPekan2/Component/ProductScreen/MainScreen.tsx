@@ -11,15 +11,13 @@ import {
 import InputProductModal from './InputItemModal';
 import { useAllProduct } from '../../hooks/useProductDetail';
 import { Product } from '../../Services/productService';
+import { useCart } from '../../Auth/CartContext';
 
 function MainScreenProduct() {
   const { products, loading, addProduct } = useAllProduct();
-  // const [Data,setData] = useState<Product[]>([]);
   const [isModalFisible, setIsModalVisible] = useState(false);
 
-  // useEffect(() => {
-  //   setData(products)
-  // }, [products])
+  const {addToCart} = useCart()
 
   if (loading) {
     return (
@@ -42,11 +40,12 @@ function MainScreenProduct() {
             <Image source={{ uri: item.image }} style={styles.image} />
             <Text style={styles.name}>Name: {item.title}</Text>
             {/* <Text style={styles.name}>Name: {item.name.toUpperCase()}</Text> */}
-            <Text style={styles.price}>Price: {item.price}</Text>
+            <Text style={styles.price}>Price: $ {item.price}</Text>
             <TouchableOpacity 
             disabled={false} 
             activeOpacity={0.5}
             style={styles.cartButton}
+            onPress={() => addToCart(item)}
             >
               <Text style={styles.cartText}>Tambah Keranjang</Text>
             </TouchableOpacity>
