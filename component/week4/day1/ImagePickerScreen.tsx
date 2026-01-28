@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Button, Image, StyleSheet, Alert } from 'react-native';
 import {
   launchCamera,
@@ -11,8 +11,18 @@ import {
   requestGalleryPermission,
 } from './permissions';
 
+import { isSensorAvailable, simplePrompt } from '@sbaiahmed1/react-native-biometrics';
+
+type SensorInfo = {
+    available: boolean;        // Whether biometric auth is available
+    biometryType?: string;     // Type of biometry ('FaceID', 'TouchID', 'Fingerprint', etc.)
+    error?: string;            // Error message if not available
+    errorCode?: string;        // Error code if not available (platform-specific)
+}
+
 export default function ImagePickerScreen() {
   const [imageUri, setImageUri] = useState<string | null>(null);
+  const [status,setStatus] = useState('Mengecek Sensor....')
 
   function handleResponse(response: ImagePickerResponse) {
     if (response.didCancel) return;
@@ -64,6 +74,43 @@ export default function ImagePickerScreen() {
       handleResponse
     );
   }
+
+  useEffect(() => {
+
+        const check = async () => {
+            const sensorInfo: SensorInfo = await isSensorAvailable();
+
+            if (sensorInfo.available) {
+                if (sensorInfo.biometryType === 'FaceID') {
+                    setStatus('Face ID Tersedia');
+                  } else {
+                    setStatus('Sensor Biometrik Tersedia');
+                    handleAuth()
+                }
+            } else {
+                setStatus('Biometrik Tidak Tersedia');
+            }
+        };
+        check();
+
+    }, []);
+
+        const handleAuth = async () => {
+        try {
+            const { success } = await simplePrompt(
+                'Konfirmasi Identitas'
+            );
+
+            if (success) {
+                Alert.alert('Berhasil', 'Identitas Terverifikasi!');
+            } else {
+                console.log('User membatalkan atau verifikasi gagal');
+            }
+        } catch (error) {
+            Alert.alert('Error', 'Terjadi kesalahan pada sensor');
+        }
+    };
+  
 
   return (
     <View style={styles.container}>
