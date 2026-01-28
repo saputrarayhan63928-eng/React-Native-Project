@@ -1,7 +1,8 @@
 import React from 'react';
 // import ErrorBoundary from './component/week2/EvaluasiPekan2/Error/ErrorBoundary';
 // import AppNavigator from './component/week2/EvaluasiPekan2/Routh/IntiRouth';
-import ImagePickerScreen from './component/week4/day1/ImagePickerScreen';
+// import ImagePickerScreen from './component/week4/day1/ImagePickerScreen';
+import LocationScreen from './component/week4/day3/LocationScreen';
 
 
 
@@ -14,6 +15,7 @@ export default function App() {
     // <ErrorBoundary>
     //   <AppNavigator/>
     // </ErrorBoundary>
-    <ImagePickerScreen/>
+    // <ImagePickerScreen/>
+    <LocationScreen/>
   );
 }
