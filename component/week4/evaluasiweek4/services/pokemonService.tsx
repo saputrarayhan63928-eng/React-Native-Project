@@ -9,6 +9,6 @@ export async function fetchPokemonList(){
 }
 
 export async function fetchPokemonDetail (name: string){
-    const response = await pokeApi.get<PokemonDetail>('/pokemon/${name}')
+    const response = await pokeApi.get<PokemonDetail>(`/pokemon/${name}`)
     return response.data
 }

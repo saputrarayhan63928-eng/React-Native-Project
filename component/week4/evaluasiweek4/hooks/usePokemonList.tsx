@@ -1,16 +1,13 @@
-import { use, useEffect, useState } from "react";
+import {useEffect, useState } from "react";
 import { fetchPokemonList } from "../services/pokemonService";
 import { PokemonListItem } from "../types/pokemon";
 
-export function usePokemonLIst(){
+export function usePokemonList(){
     const [data,setData] = useState<PokemonListItem[]>([])
     const [loading,setLoading] =useState(true)
     const [error,setError] = useState<string | null>(null)
 
-    useEffect(() => {
-        load()
-    }, [])
-
+    
     const load = async () => {
         try{
             setLoading(true)
@@ -26,5 +23,9 @@ export function usePokemonLIst(){
         }
     }
 
+    useEffect(() => {
+        load()
+    }, [])
+    
     return {data,loading,error, reload:load}
 }

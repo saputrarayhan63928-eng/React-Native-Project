@@ -2,28 +2,33 @@ import { useState, useEffect } from "react";
 import { fetchPokemonDetail } from "../services/pokemonService";
 import { PokemonDetail } from "../types/pokemon";
 
-export function usePokemonDetail(name: string){
-    const [data,setData] = useState<PokemonDetail | null>(null)
-    const [loading,setLoading] = useState(true)
-    const [error,setError] = useState<string | null>(null)
+export function usePokemonDetail(name: string) {
+  const [data, setData] = useState<PokemonDetail | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-    useEffect(() =>{
-        load()
-    }, [name])
+  const load = async () => {
+    try {
+      setLoading(true);
+      setError(null);
 
-    const load = async () =>{
-        try{
-            setLoading(true)
-            setError(null)
-            const result = await fetchPokemonDetail(name)
-            return result
-        }
-        catch{
-            setError('Pokemon Tidak Ditemukan')
-        }
-        finally{
-            setLoading(false)
-        }
+      console.log('FETCH DETAIL NAME:', name);
+      
+      const result = await fetchPokemonDetail(name);
+      console.log('DETAIL DATA:', data);
+      setData(result);
+    } catch (e){
+        console.log('FETCH DETAIL ERROR:', e);
+      setError('Pokemon Tidak Ditemukan');
+      setData(null);
+    } finally {
+      setLoading(false);
     }
-    return {data,error,loading}
+  };
+
+  useEffect(() => {
+    load();
+  }, [name]);
+
+  return { data, error, loading };
 }

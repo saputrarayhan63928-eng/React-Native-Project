@@ -13,7 +13,7 @@ export interface PokemonDetail{
     height: number,
     weight: number,
     sprites: {
-        font_default: string
+        front_default: string
     }
     types:{
         type:{
